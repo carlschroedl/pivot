@@ -4,6 +4,7 @@
 
 <form class="w75 textLeft" role="form" method="POST" action="{{ route('register') }}">
     {{ csrf_field() }}
+  @if (!$isConfirmation)
   <div class="table row-spacing1 w100" id="registerStep1">
 
     @if ($errors->has('email'))
@@ -23,24 +24,11 @@
 
         </div>
     </div>
+   @endif
 
-    @if ($errors->has('token'))
-    <div class="w100">
-        <label class="w33 label0 textRight"></label>
-        <div class="w67 textLeft">
-          <div class="w67 text2">{{ $errors->first('token') }}</div>
-        </div>
-    </div>
-    @endif
 
-    <div class="w100{{ $errors->has('token') ? ' has-error' : '' }}">
-        <label for="name" class="w33 label0 textRight">Verification Token</label>
-
-        <div class="w67 textLeft">
-            <input id="token" type="text" class="w67" name="token" value="{{ $token }}">
-
-        </div>
-    </div>
+    <div class="registration_confirmation">
+    <input id="token" type="hidden" class="w67" name="token" value="{{ $token }}">
 
     <div class="w100">
         <label class="w33 label0 textRight">~or~</label>
@@ -52,12 +40,6 @@
         </div>
     </div>
 
-    <!-- <div class="w100">
-        <label class="w33 label0 textRight"></label>
-        <div class="w67 textLeft">
-              <div id="getTokenStatus" class="w67 text2"></div>
-        </div>
-    </div> -->
     <div class="w100">
         <label class="w33 label0 textRight"></label>
         <div class="w67 textLeft">
